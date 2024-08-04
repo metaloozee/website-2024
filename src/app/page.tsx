@@ -19,7 +19,7 @@ import MessageGroup from "@/components/Message";
 
 export default function IndexPage() {
   return (
-    <section className="relative px-4 h-screen flex items-center justify-center container max-w-2xl space-y-14 py-10">
+    <section className="relative px-4 flex items-center justify-center container max-w-2xl space-y-14 py-10">
       <motion.ul
         transition={{
           staggerChildren: 0.3,
@@ -27,6 +27,7 @@ export default function IndexPage() {
         }}
         initial="hidden"
         animate="show"
+        className="space-y-10 mb-20"
       >
         <MessageGroup
           messages={[
@@ -45,49 +46,25 @@ export default function IndexPage() {
               ),
             },
             {
-              key: "cards",
-              isGroup: true,
+              key: "note",
               content: (
-                <div className="flex gap-2 flex-wrap">
-                  <Button
-                    className="cursor-pointer"
-                    variant={"secondary"}
-                    asChild
-                  >
-                    <Card className="bg-zinc-900/50 flex flex-col max-w-fit">
-                      <CardHeader className="p-4">
-                        <p className="text-sm italic">about-me</p>
-                      </CardHeader>
-                    </Card>
-                  </Button>
-                  <Button
-                    className="cursor-pointer"
-                    variant={"secondary"}
-                    asChild
-                  >
-                    <Card className="bg-zinc-900/50 flex flex-col max-w-fit">
-                      <CardHeader className="p-4">
-                        <p className="text-sm italic">what-have-i-done</p>
-                      </CardHeader>
-                    </Card>
-                  </Button>
-                  <Button
-                    className="cursor-pointer"
-                    variant={"secondary"}
-                    asChild
-                  >
-                    <Card className="bg-zinc-900/50 flex flex-col max-w-fit">
-                      <CardHeader className="p-4">
-                        <p className="text-sm italic">how-do-you-contact-me</p>
-                      </CardHeader>
-                    </Card>
-                  </Button>
-                </div>
+                <p className="italic">
+                  p.s. try asking me anything about me below :3
+                </p>
               ),
             },
           ]}
         />
       </motion.ul>
+
+      <div className="fixed inset-x-0 bottom-0">
+        <div className="relative container flex gap-2 w-full grow overflow-hidden p-10 max-w-2xl">
+          <Input placeholder="what have you made so far?" />
+          <Button>
+            <CornerDownLeft className="size-4" />
+          </Button>
+        </div>
+      </div>
     </section>
   );
 }

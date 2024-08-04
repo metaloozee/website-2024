@@ -38,15 +38,9 @@ function MessageBubble({
       }}
       variants={itemVariant}
     >
-      {isGroup ? (
-        <div>{content}</div>
-      ) : (
-        <Card className="bg-zinc-900/50 flex flex-col max-w-fit">
-          <CardHeader className="p-4">
-            <p className="text-sm">{content}</p>
-          </CardHeader>
-        </Card>
-      )}
+      <Card className="bg-zinc-900/50 flex flex-col max-w-fit">
+        <CardHeader className="p-4 text-sm">{content}</CardHeader>
+      </Card>
     </motion.div>
   );
 }
@@ -54,7 +48,7 @@ function MessageBubble({
 export default function MessageGroup({
   messages,
 }: {
-  messages: Array<{ key: string; content: ReactNode, isGroup?: boolean }>;
+  messages: Array<{ key: string; content: ReactNode }>;
 }) {
   return (
     <motion.li
@@ -75,8 +69,8 @@ export default function MessageGroup({
       </Avatar>
 
       <div className="flex flex-col gap-2">
-        {messages.map(({ key: id, content, isGroup }, i) => (
-          <MessageBubble key={id} content={content} isGroup={isGroup} />
+        {messages.map(({ key: id, content }, i) => (
+          <MessageBubble key={id} content={content} />
         ))}
       </div>
     </motion.li>
