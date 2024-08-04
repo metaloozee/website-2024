@@ -16,6 +16,8 @@
     "db:check": "drizzle-kit check"
   },
   "dependencies": {
+    "@ai-sdk/google": "^0.0.30",
+    "@ai-sdk/openai": "^0.0.40",
     "@neondatabase/serverless": "^0.9.4",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
@@ -27,6 +29,7 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
+    "ai": "^3.3.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.32.1",
@@ -38,6 +41,8 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
     "server-only": "^0.0.1",
     "sonner": "^1.5.0",
     "superjson": "^2.2.1",

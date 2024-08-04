@@ -12,6 +12,9 @@ import {
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
+import { MemoizedReactMarkdown } from "@/components/Markdown";
+import remarkGfm from "remark-gfm";
+
 const groupVariant = {
   hidden: { opacity: 0, x: -5 },
   show: { opacity: 1, x: 0 },
@@ -21,13 +24,7 @@ const itemVariant = {
   show: { opacity: 1 },
 };
 
-function MessageBubble({
-  isGroup,
-  content,
-}: {
-  isGroup?: boolean;
-  content: ReactNode;
-}) {
+function MessageBubble({ content }: { content: string }) {
   return (
     <motion.div
       transition={{
@@ -39,7 +36,34 @@ function MessageBubble({
       variants={itemVariant}
     >
       <Card className="bg-zinc-900/50 flex flex-col max-w-fit">
-        <CardHeader className="p-4 text-sm">{content}</CardHeader>
+        <CardHeader className="p-4 text-sm">
+          <MemoizedReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              strong({ children }) {
+                return (
+                  <strong className="underline decoration-primary underline-offset-4">
+                    {children}
+                  </strong>
+                );
+              },
+              li({ children }) {
+                return <li className="list-inside list-disc">{children}</li>;
+              },
+              ul({ children }) {
+                return <ul className="list-item">{children}</ul>;
+              },
+              ol({ children }) {
+                return <ol className="list-item">{children}</ol>;
+              },
+              p({ children }) {
+                return <p>{children}</p>;
+              },
+            }}
+          >
+            {content.toLocaleLowerCase()}
+          </MemoizedReactMarkdown>
+        </CardHeader>
       </Card>
     </motion.div>
   );
@@ -48,7 +72,7 @@ function MessageBubble({
 export default function MessageGroup({
   messages,
 }: {
-  messages: Array<{ key: string; content: ReactNode }>;
+  messages: Array<{ key: string; content: string }>;
 }) {
   return (
     <motion.li
