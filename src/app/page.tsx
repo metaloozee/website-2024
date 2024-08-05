@@ -1,28 +1,13 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-import { CornerDownLeft, User } from "lucide-react";
 
 import { motion } from "framer-motion";
 import MessageGroup from "@/components/Message";
 
-import { useChat } from "ai/react";
 import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor";
 
 export default function IndexPage() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
 
@@ -38,7 +23,7 @@ export default function IndexPage() {
         }}
         initial="hidden"
         animate="show"
-        className="space-y-10 mb-20"
+        className="space-y-10 mb-40 md:mb-20"
       >
         <MessageGroup
           messages={[
@@ -49,67 +34,57 @@ export default function IndexPage() {
             {
               key: "short-about-me",
               content:
-                "im an eighteen-year-old programming enthusiast that is passionate about both web development and artificial intelligence. my drive comes from a never-ending curiosity.",
+                "im an eighteen-year-old programming enthusiast that is passionate about both full-stack-development and artificial-intelligence. my drive comes from a never-ending curiosity.",
             },
             {
               key: "note",
-              content: "*p.s. try asking me anything about me below :3*",
+              content: "*p.s. to know more about me or what i do, click on the buttons below :3*",
+            },
+          ]}
+        />
+        <MessageGroup
+          user
+          messages={[
+            {
+              key: "about",
+              content: "tell me more about yourself",
             },
           ]}
         />
 
-        {messages.map((m) => {
-          if (m.role === "user") {
-            return (
-              <div
-                key={m.id}
-                className="flex flex-row-reverse justify-start items-end gap-3 md:gap-5"
-              >
-                <Avatar>
-                  <AvatarFallback>
-                    <User className="size-5" />
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col gap-2">
-                  <Card className="flex flex-col">
-                    <CardHeader className="p-4">
-                      <p className="text-sm">{m.content}</p>
-                    </CardHeader>
-                  </Card>
-                </div>
-              </div>
-            );
-          } else {
-            return (
-              <MessageGroup
-                key={m.id}
-                messages={[
-                  {
-                    key: m.id,
-                    content: m.content,
-                  },
-                ]}
-              />
-            );
-          }
-        })}
+        <MessageGroup
+          messages={[
+            {
+              key: "about-1",
+              content:
+                "I stand at the intersection of academia and innovation, an 18-year-old computer science student from [Mumbai, India](https://en.wikipedia.org/wiki/Mumbai). My journey in technology is as diverse as it is promising. I started my creative path in the vibrant world of [e-sports](https://en.wikipedia.org/wiki/Esports), where I expressed my flair by designing eye-catching graphics for teams and communities.",
+            },
+            {
+              key: "about-2",
+              content: "Now, with my sights set on the ever-expanding horizons of computer science, I'm carving out my niche in the realms of full-stack development and artificial intelligence. While pursuing my formal education in computer science, I'm not content with classroom learning alone. My insatiable curiosity drives me to delve deep into the foundations of AI, mastering complex subjects like [linear-algebra](https://en.wikipedia.org/wiki/Linear_algebra), [machine-learning](https://en.wikipedia.org/wiki/Machine_learning), and [deep-learning](https://en.wikipedia.org/wiki/Deep_learning)."
+            },
+            {
+              key: "about-3",
+              content: "With a solid foundation in design, a growing expertise in full-stack development, and a deepening understanding of AI, I'm not just preparing for the future of technology - I'm actively shaping it and I'm excited to see where my next \"big thing\" will take me as I continue to evolve, innovate, and inspire in the world of computer science and AI."
+            },
+          ]}
+        />
       </motion.ul>
 
-      <div className="fixed inset-x-0 bottom-0">
-        <form
-          onSubmit={handleSubmit}
-          className="relative container flex gap-2 w-full grow overflow-hidden p-10 max-w-2xl"
-        >
-          <Input
-            value={input}
-            onChange={handleInputChange}
-            placeholder="what have you made so far?"
-          />
-          <Button type="submit">
-            <CornerDownLeft className="size-4" />
-          </Button>
-        </form>
-      </div>
+      <motion.div 
+        transition={{
+          delay: 1
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="fixed inset-x-0 bottom-0"
+      >
+        <div className="relative container flex flex-wrap justify-center gap-5 w-full grow overflow-hidden p-10 max-w-2xl">
+          <Button variant={"secondary"}>about-me</Button>
+          <Button variant={"secondary"}>what-have-i-done</Button>
+          <Button variant={"secondary"}>get-in-touch-with-me</Button>
+        </div>
+      </motion.div>
     </section>
   );
 }

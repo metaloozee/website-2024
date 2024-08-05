@@ -1,19 +1,14 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { User } from "lucide-react";
+import Link from "next/link";
 
 import { MemoizedReactMarkdown } from "@/components/Markdown";
 import remarkGfm from "remark-gfm";
+import clsx from "clsx";
 
 const groupVariant = {
   hidden: { opacity: 0, x: -5 },
@@ -40,13 +35,6 @@ function MessageBubble({ content }: { content: string }) {
           <MemoizedReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              strong({ children }) {
-                return (
-                  <strong className="underline decoration-primary underline-offset-4">
-                    {children}
-                  </strong>
-                );
-              },
               li({ children }) {
                 return <li className="list-inside list-disc">{children}</li>;
               },
@@ -58,6 +46,9 @@ function MessageBubble({ content }: { content: string }) {
               },
               p({ children }) {
                 return <p>{children}</p>;
+              },
+              a({ children, href }) {
+                return <Link target="_blank" rel="noopener noreferrer" href={href as string} className="text-purple-300 bg-purple-50/10">{children}</Link>;
               },
             }}
           >
@@ -71,8 +62,10 @@ function MessageBubble({ content }: { content: string }) {
 
 export default function MessageGroup({
   messages,
+  user,
 }: {
   messages: Array<{ key: string; content: string }>;
+  user?: boolean;
 }) {
   return (
     <motion.li
@@ -85,11 +78,16 @@ export default function MessageGroup({
         staggerChildren: 0.1,
       }}
       variants={groupVariant}
-      className="flex gap-3 md:gap-5 justify-start items-end"
+      className={clsx(
+        "flex gap-3 md:gap-5 justify-start items-end",
+        user && "flex-row-reverse"
+      )}
     >
       <Avatar>
-        <AvatarImage src="https://github.com/metaloozee.png" />
-        <AvatarFallback>A</AvatarFallback>
+        {!user && <AvatarImage src="https://github.com/metaloozee.png" />}
+        <AvatarFallback>
+          <User className="size-4" />
+        </AvatarFallback>
       </Avatar>
 
       <div className="flex flex-col gap-2">
