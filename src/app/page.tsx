@@ -161,7 +161,7 @@ export default function IndexPage() {
             {
               key: "note",
               content:
-                "*p.s. to know more about me or what i do, click on the buttons below :3*",
+                "*p.s. want to know more about me? click on the buttons below :3*",
             },
           ]}
         />
