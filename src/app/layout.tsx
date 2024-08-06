@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { GeistSans } from 'geist/font/sans';
 
 export const metadata: Metadata = {
-  title: "ayan",
+  title: "アヤン",
 };
 
 export default function RootLayout({
