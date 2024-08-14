@@ -70,4 +70,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  *::selection {
+    @apply text-purple-300 bg-purple-50/10
+  }
 }

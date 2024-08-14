@@ -122,11 +122,9 @@ export default function IndexPage() {
             {
               key: "contact-2",
               content: `\
-+ [X (formerly twitter)](https://x.com/metaloozee)
++ [x.com/metaloozee](https://x.com/metaloozee)
 -----
-+ [github](https://github.com/metaloozee)
------
-+ [email](mailto:ayanparkar123@gmail.com)
++ [github.com/metaloozee](https://github.com/metaloozee)
               `,
             },
           ]}
@@ -174,36 +172,34 @@ export default function IndexPage() {
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-
           className="flex flex-wrap justify-end items-end gap-2"
         >
-            <Button
-              onClick={() => handleAboutMe()}
-              disabled={!!aboutMe}
-              variant={"secondary"}
-              className={clsx("text-xs", !!aboutMe && "hidden")}
-            >
-              about-me
-            </Button>
-            <Button
-              onClick={() => handleProjects()}
-              disabled={!!projects}
-              variant={"secondary"}
-              className={clsx("text-xs", !!projects && "hidden")}
-            >
-              what-have-i-done
-            </Button>
-            <Button
-              onClick={() => handleContact()}
-              disabled={!!contact}
-              variant={"secondary"}
-              className={clsx("text-xs", !!contact && "hidden")}
-            >
-              get-in-touch-with-me
-            </Button>
+          <Button
+            onClick={() => handleAboutMe()}
+            disabled={!!aboutMe}
+            variant={"secondary"}
+            className={clsx("text-xs", !!aboutMe && "hidden")}
+          >
+            about-me
+          </Button>
+          <Button
+            onClick={() => handleProjects()}
+            disabled={!!projects}
+            variant={"secondary"}
+            className={clsx("text-xs", !!projects && "hidden")}
+          >
+            what-have-i-done
+          </Button>
+          <Button
+            onClick={() => handleContact()}
+            disabled={!!contact}
+            variant={"secondary"}
+            className={clsx("text-xs", !!contact && "hidden")}
+          >
+            get-in-touch-with-me
+          </Button>
         </motion.div>
       </motion.ul>
-
     </section>
   );
 }
